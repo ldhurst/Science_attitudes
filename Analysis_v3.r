@@ -1,3 +1,34 @@
+#install all packages
+
+install.packages("pacman")
+
+pacman::p_load(vioplot,Hmisc,rstatix,foreign,plyr,multcomp,tidyr,data.table,dplyr,ppcor,ggplot2,forcats,gridExtra,diptest,stargazer,psych,ltm,tidyverse)
+
+#if for some reason that doesn't work, try the relevant line manuually - just remove the hash
+
+#install.packages("vioplot")
+#install.packages("Hmisc")
+#install.packages("rstatix")
+#install.packages("foreign")
+#install.packages("plyr")
+#install.packages("multcomp")
+#install.packages("tidyr")
+#install.packages("data.table")
+#install.packages("dplyr")
+#install.packages("ppcor")
+#install.packages("ggplot2")
+#install.packages("forcats")
+#install.packages("gridExtra")
+#install.packages("diptest")
+#install.packages("stargazer")
+#install.packages("psych")
+#install.packages("ltm")
+#install.packages("tidyverse")
+
+
+
+#require all packages
+
 library(vioplot)
 library(Hmisc)
 library(rstatix)
@@ -104,7 +135,7 @@ p <- ggplot(data5a, aes(fill=fct_inorder(Edu_levels), y=value, x=Trust_levels)) 
     
     p<- p+ aes(x=fct_inorder(Trust_levels))+ xlab("Trust level")+ ylab("Frequency") + guides(fill=guide_legend(title="Educational qual")) + theme(aspect.ratio=1) +ggtitle("A")
     
-pdf("Fig3a_Edu_Trust.pdf")
+pdf("FigSR2a_Edu_Trust.pdf")
 
 
     print(p)
@@ -130,7 +161,7 @@ pct.hy <- round(slices.hy/sum(slices.hy)*100)
 
 data.hyfr <- data.frame(name=lbls.hy, value=pct.hy)
 
-pdf("Fig1_Freq.pdf", height = 8, width = 15)
+pdf("FigSR3_Freq.pdf", height = 8, width = 15)
 
 par(mfrow=c(1:2))
 barplot(pct.tr, names.arg=lbls.tr, ylab = "%", main = "A.")
@@ -184,11 +215,11 @@ p1 <- ggplot(data5b, aes(fill=fct_inorder(Edu_levels), y=value, x=Hype_levels)) 
    
    
 
-pdf("Fig3b_Edu_Hype.pdf", onefile =TRUE)
+pdf("FigSR2b_Edu_Hype.pdf", onefile =TRUE)
 print(p1)
     dev.off()
     
-    pdf("Fig3_all.pdf", width =15, height = 8)
+    pdf("FigSR2_all.pdf", width =15, height = 8)
     print(grid.arrange(p, p1, nrow=1))
     dev.off()
     
@@ -201,7 +232,7 @@ x3<- data1$sci_know[data1$Trust==0]
 x4 <- data1$sci_know[data1$Trust==1]
 x5 <- data1$sci_know[data1$Trust==2]
 
-pdf("Fig2_SciK_Attitudes.pdf", height = 8, width = 15)
+pdf("FigSR1_SciK_Attitudes.pdf", height = 8, width = 15)
 par(mfrow=c(1,2))
 par(pty="s")
 vioplot(x1, x2, x3, x4, x5, names= c("Trust--", " Trust-", "Neutral", "Trust+", "Trust++"), 
@@ -237,7 +268,7 @@ xvals <- seq(-0.3, 1, 0.01)
 predictedcounts <- predict(quad.model, list(sci_know = xvals, know2 = xvals^2))
 
 predictedcounts3 <- predict(three.model, list(sci_know = xvals, know2 = xvals^2, know3 = xvals^3))
-pdf("Fig5_SciKnow_v_scigen_selfassess.pdf")
+pdf("Fig2_SciKnow_v_scigen_selfassess.pdf")
 pty="s"
 plot(data1$sci_know, data1$scigen_self_under, xlab="Scientific knowledge",  ylab = "Self assessed understanding" , pch=16, cex=0.5, col="blue")
 lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
@@ -255,7 +286,7 @@ x3<- data1$scigen_self_under[data1$Trust==0]
 x4 <- data1$scigen_self_under[data1$Trust==1]
 x5 <- data1$scigen_self_under[data1$Trust==2]
 
-pdf("Fig4_Selfass_Attitudes.pdf", height = 8, width = 15)
+pdf("Fig1_Selfass_Attitudes.pdf", height = 8, width = 15)
 par(mfrow=c(1,2))
 par(pty="s")
 vioplot(x1, x2, x3, x4, x5, names= c("Trust--", " Trust-", "Neutral", "Trust+", "Trust++"), 
@@ -321,14 +352,14 @@ linear.model.kt <- lm(data1$sci_know~data1$Trust)
 quad.model.kt <- lm(data1$sci_know~tr+ tr2)
 
 
-pdf("TrHy vs SciKn quad.pdf", width=15, height=8)
-par(mfrow=c(1,2))
+#pdf("TrHy vs SciKn quad.pdf", width=15, height=8)
+#par(mfrow=c(1,2))
 
 xvals <- seq(-2, 2, 1)
 predictedcounts <- predict(quad.model.kt, list(tr = xvals, tr2 = xvals^2))
 
-plot(tr, data1$sci_know)
-lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
+#plot(tr, data1$sci_know)
+#lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
 
 hy <- data1$Hype
 
@@ -339,10 +370,10 @@ quad.model.kh <- lm(data1$sci_know~hy+ hy2)
 xvals <- seq(-2, 2, 1)
 predictedcounts <- predict(quad.model.kh, list(hy = xvals, hy2 = xvals^2))
 
-plot(hy, data1$sci_know)
-lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
+#plot(hy, data1$sci_know)
+#lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
 
-dev.off()
+#dev.off()
 #gender effects	
 sex <- data1$RS_Sex
 
@@ -382,7 +413,7 @@ srs <- c(x1.sr, x2.sr, x3.sr, x4.sr, x5.sr)
 
 lbls <- c("Trust--", "Trust-", "Neutral", "Trust+", "Trust++")
 
-pdf("Fig9_SR_hype_trust.pdf", height = 8, width=15)
+pdf("Fig6abc_SR.pdf", height = 8, width=15)
 par(mfrow=c(1,3))
 par(pty="s")
 
@@ -561,7 +592,7 @@ pct.gm <- round(slices.gm/sum(slices.gm)*100)
 
 data.gmfr <- data.frame(name=lbls.gm, value=pct.gm)
 
-pdf("FigS1c_FreqGM.pdf")
+pdf("FigS1a_FreqGM.pdf")
 
 barplot(pct.gm, names.arg=lbls.gm, ylab = "%")
 
@@ -616,7 +647,7 @@ p1 <- ggplot(data5b, aes(fill=fct_inorder(Edu_levels), y=value, x=GM_levels)) +
    
    
 
-pdf("FigS1c_Edu_GM.pdf", onefile =TRUE)
+pdf("FigS1b_Edu_GM.pdf", onefile =TRUE)
 print(p1)
     dev.off()
     
@@ -649,7 +680,7 @@ tukey.res.sg_gm <- summary(post_test.sg_gm)
 
 
     
-    pdf("Fig7ab_GM.pdf", width=15, height =8)
+    pdf("Fig4ab_GM.pdf", width=15, height =8)
     
 
 
@@ -710,15 +741,15 @@ quad.model.kgm <- lm(data1$sci_know~gm+ gm2)
 xvals <- seq(-2, 2, 1)
 predictedcounts <- predict(quad.model.kgm, list(gm = xvals, gm2 = xvals^2))
 
-plot(gm, data1$sci_know)
-lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
+#plot(gm, data1$sci_know)
+#lines(xvals, predictedcounts, col = "darkgreen", lwd = 2)
 
 linear.model.sagm <- lm(data1$scigen_self_under~gm)
 quad.model.sagm <- lm(data1$scigen_self_under~gm+ gm2)
 #gap v trust and hype
 
  gap1 <-  sci_know - data1$scigen_self_under
-pdf("Fig6Gap_v_attitude.pdf", height = 8, width=15)
+pdf("Fig3Gap_v_attitude.pdf", height = 8, width=15)
 
 par(mfrow=c(1,2))
 x1 <- as.numeric(gap1[data1$Trust==2])
@@ -800,7 +831,7 @@ tsa_v <- table_glht(tukey.res.sg_v)
 stargazer(tsa_v, type='html', out = "Tukey_sa_vac.html")
 
 
-pdf("Fig8_vaccine.pdf", width=20, height =8)
+pdf("Fig5_vaccine.pdf", width=20, height =8)
 par(mfrow=c(1,3))
 par(pty="s")
 vioplot(x1, x2, x3, x4, names=c("Had it", "Will have it", "Reject", "no answer"), 
@@ -946,10 +977,10 @@ dev.off()
 
 #engagement and attitude
 
-pdf("Engagement_TrustHype.pdf", height =8, width =15)
+#pdf("Engagement_TrustHype.pdf", height =8, width =15)
 
-par(pty="s")
-par(mfrow=c(1,2))
+#par(pty="s")
+#par(mfrow=c(1,2))
 
 x1 <- data1$SciRelations[data1$Trust==-2]
 x2<- data1$SciRelations[data1$Trust==-1]
@@ -957,8 +988,8 @@ x3<- data1$SciRelations[data1$Trust==0]
 x4 <- data1$SciRelations[data1$Trust==1]
 x5 <- data1$SciRelations[data1$Trust==2]
 
-vioplot(x1, x2, x3, x4, x5, names=c("Trust --", "Trust-", "neutral", "Trust+", "Trust++"), 
-   col="gold", ylab ="Engagement", cex.axis=1.2 )
+#vioplot(x1, x2, x3, x4, x5, names=c("Trust --", "Trust-", "neutral", "Trust+", "Trust++"), 
+#   col="gold", ylab ="Engagement", cex.axis=1.2 )
    
    res.aov.e_t <- aov(data1$SciRelations~Trust, data = data1)
 
@@ -982,10 +1013,10 @@ x3<- data1$SciRelations[data1$Hype==0]
 x4 <- data1$SciRelations[data1$Hype==1]
 x5 <- data1$SciRelations[data1$Hype==2]
 
-vioplot(x1, x2, x3, x4, x5, names=c("Hype ++", "Hype", "neutral", "Hype-", "Hype--"), 
-   col="gold", ylab ="Engagement", cex.axis=1.2 )
+#vioplot(x1, x2, x3, x4, x5, names=c("Hype ++", "Hype", "neutral", "Hype-", "Hype--"), 
+ #  col="gold", ylab ="Engagement", cex.axis=1.2 )
    
-   dev.off()
+#   dev.off()
 
   dataA <- read.csv(file = "survey_data.csv", header=TRUE)
   
@@ -1025,11 +1056,11 @@ gap.m <- gap.m[!is.na(gap.m)]
 
 gap.f <- as.numeric(gap1[data1$RS_Sex=="Female"])
 gap.f<- gap.f[!is.na(gap.f)]
-pdf("Gap_sex.pdf")
-vioplot(gap.m, gap.f, names=c("Male", "Female"), 
-   col="gold", ylab ="Gap", cex.axis=1.2 )
+#pdf("Gap_sex.pdf")
+#vioplot(gap.m, gap.f, names=c("Male", "Female"), 
+#   col="gold", ylab ="Gap", cex.axis=1.2 )
 
-dev.off()
+#dev.off()
 
 wt.sr.gap <- wilcox.test(gap.m, gap.f)
 m.gapm <- median(gap.m)
@@ -1225,7 +1256,7 @@ sd.sub <- c(propsig.tr, propsig.hy, propsig.gm, propsig.va)
 
 data6 <- data.frame(Variable = vars, Dip=signif(dip, 3), P=signif(P, 3), N=N, Median = signif(means.sub, 3), Prop_sig = signif(sd.sub, 3) )
 
-pdf("Table5.pdf")
+pdf("TableS3.pdf")
 grid.table(data6, rows=NULL)
 dev.off()
 
