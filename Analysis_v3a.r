@@ -828,7 +828,7 @@ post_test.sg_v <- glht(res.aov.sg_v,
 tukey.res.sg_v <- summary(post_test.sg_v)
 
 tsa_v <- table_glht(tukey.res.sg_v)
-stargazer(tsa_v, type='html', out = "Tukey_sa_vac.html")
+stargazer(tsa_v, type='html', out = "TableS2a_Tukey_sa_vac.html")
 
 
 pdf("Fig5_vaccine.pdf", width=20, height =8)
@@ -856,7 +856,7 @@ linfct = mcp(CovVac = "Tukey")
 tukey.res.k_v <- summary(post_test.k_v)
 
 tk_v <- table_glht(tukey.res.k_v)
-stargazer(tk_v, type='html', out = "Tukey_know_vac.html")
+stargazer(tk_v, type='html', out = "TableS2b_Tukey_know_vac.html")
 
 par(pty="s")
 vioplot(x1, x2, x3, x4, names=c("Had it", "Will have it", "Reject", "no answer"), 
@@ -881,7 +881,7 @@ linfct = mcp(CovVac = "Tukey")
 tukey.res.g_v <- summary(post_test.g_v)
 
 tgap_v <- table_glht(tukey.res.g_v)
-stargazer(tgap_v, type='html', out = "Tukey_gap_vac.html")
+stargazer(tgap_v, type='html', out = "TableS2c_Tukey_gap_vac.html")
 
 wilcox.test(x5, x3)
 
@@ -1083,7 +1083,7 @@ df.tr <-  add_row(df.tr, Question = q, rho = ct$estimate, P =ct$p.value)
 
 
 }
-write.csv(df.tr, "TrustV12Qs.csv")
+write.csv(df.tr, "TableS1_1TrustV12Qs.csv")
 
 for (i in 17:28) {
 ct <-cor.test(data1[,i], hy, method="spearman")
@@ -1100,7 +1100,7 @@ df.hy <-  add_row(df.hy, x = q, y = ct$estimate, z =ct$p.value)
 
 
 }
-write.csv(df.hy, "HypeV12Qs.csv")
+write.csv(df.hy, "TableS1_2HypeV12Qs.csv")
 
 for (i in 17:28) {
 ct <-cor.test(data1[,i], gm, method="spearman")
@@ -1118,7 +1118,7 @@ df.gm <-  add_row(df.gm, x = q, y = ct$estimate, z =ct$p.value)
 
 }
 
-write.csv(df.gm, "GMV12Qs.csv")
+write.csv(df.gm, "TableS1_3GMV12Qs.csv")
 
 
 
