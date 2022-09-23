@@ -7,4 +7,4 @@
  
  The analysis scripts are split into two folders, one for the analysis of the data with only biological questions (bio_know), one for all questions (sci_know).  Each folder contains the necessary input files and an R script to generate all figures and tables in the manuscript and its supplements.
  
- The script will import packages needed if your computer doesn't already have them.  Some systems may require appropriate permissions to do this.
+ The scripts will import packages needed if your computer doesn't already have them.  Some systems may require appropriate permissions to do this.  Scripts were run on R version 4.2.1.  No guarantees are made as regards compatibility with modified versions of R.
