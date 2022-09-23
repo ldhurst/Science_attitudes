@@ -1,0 +1,149 @@
+2088/7
+120000/1840
+162.77*4
+4*104103
+10,096*12*1.03
+10096*12*1.03
+124786*0.8
+124786*0.8*4/12
+124786*0.2*4/12
+124786*0.2
+8319.067/4
+124786-8319
+binom.test(5,13)
+binom.test(5,18)
+binom.test(4,18)
+0.25^2
+q()
+66+69+75+68+76+80+67
+501/7
+10/1.75
+5*1.75
+4*3.8
+15.2*5
+/18
+76/18
+3.8*5
+1.8/5
+1-0.36
+10398*12
+1157/3
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+ct.modtr.sg
+ct.modhy.sg
+multi_pcor_MODtrust
+multi_pcor_MODhy
+resMODTR
+resMODhy
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+lm.tr.sg
+qm.tr.sg
+tr.sg.fit
+hy.sg.fit
+qm.hy.sg
+lm.hy.sg
+cor.tr.sg.pos
+cor.tr.sg.neg
+cor.hy.sg.neg
+cor.hy.sg.pos
+cor.k_sg
+fit.lin
+fit.quad
+comp.linquad
+cor.sk.tr
+cor.sk.hy
+ct.gapsd.tr
+ct.gapsd.hy
+res.gap_tr
+res.gap_hy
+multi_pcor_gap.z
+multi_pcor_gap.tr
+multi_pcor_gap.hy
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+multi_pcor_gap.z
+multi_pcor_gap
+cor.gm.sg.pos
+cor.gm.sg.pneg
+cor.gm.sg.neg
+data1$modgm <- abs(as.numeric(as.character(data1$GM_benefits)))
+ct.modgm.sg <- cor.test(data1$modgm, data1$scigen_self_under, method="spearman")
+ct.modgm.sg
+ct.gmsa
+res.sg_gm
+gm <- as.numeric(as.character(data1$GM_benefits))#
+#
+gm2 <- gm*gm#
+linear.model.gm <- lm(data1$scigen_self_under~gm)#
+quad.model.gm <- lm(data1$scigen_self_under~gm+ gm2)#
+lm.gm.sg <- summary(linear.model.gm)#
+qm.gm.sg <- summary(quad.model.gm)#
+gm.sg.fit <- anova(linear.model.gm,quad.model.gm)
+qm.gm.sg
+lm.gm.sg
+gm.sg.fit
+ct.gmsk
+cor.test(gap1, gm, method="spearman")
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+multi_pcor_gm.gap
+tukey.res.sg_v
+res.sg_v
+res.k_v
+tukey.res.k_v
+res.gapvac
+tukey.res.g_v
+res8P
+CronAlpha.sk
+sciK_all
+self_all <- data1[,1:6]
+CronAlpha.sa <- cronbach.alpha(self_all, na.rm=TRUE, CI=TRUE)
+CronAlpha.sa
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+corstars_partial <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),#
+                     result=c("none", "html", "latex")){#
+    #Compute correlation matrix#
+    require(Hmisc)#
+    x <- as.matrix(x)#
+    correlation_matrix<-pcor(x, method=method[1])#
+    R <- correlation_matrix$estimate # Matrix of correlation coeficients#
+    p <- correlation_matrix$p.value # Matrix of p-value #
+    ## Define notions for significance levels; spacing is important.#
+    mystars <- ifelse(p < .0001, "****", ifelse(p < .001, "*** ", ifelse(p < .01, "**  ", ifelse(p < .05, "*   ", "    "))))#
+    ## trunctuate the correlation matrix to two decimal#
+    R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]#
+    ## build a new matrix that includes the correlations with their apropriate stars#
+    Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))#
+    diag(Rnew) <- paste(diag(R), " ", sep="")#
+    rownames(Rnew) <- colnames(x)#
+    colnames(Rnew) <- paste(colnames(x), "", sep="")#
+    ## remove upper triangle of correlation matrix#
+    if(removeTriangle[1]=="upper"){#
+      Rnew <- as.matrix(Rnew)#
+      Rnew[upper.tri(Rnew, diag = TRUE)] <- ""#
+      Rnew <- as.data.frame(Rnew)#
+    }#
+    ## remove lower triangle of correlation matrix#
+    else if(removeTriangle[1]=="lower"){#
+      Rnew <- as.matrix(Rnew)#
+      Rnew[lower.tri(Rnew, diag = TRUE)] <- ""#
+      Rnew <- as.data.frame(Rnew)#
+    }#
+    ## remove last column and return the correlation matrix#
+    Rnew <- cbind(Rnew[1:length(Rnew)])#
+    if (result[1]=="none") return(Rnew)#
+    else{#
+      if(result[1]=="html") print(xtable(Rnew), type="html")#
+      else print(xtable(Rnew), type="latex") #
+    }#
+}
+Table1b_bot <- corstars_partial(dataMODhy.narm, method="spearman",removeTriangle="lower", result="html")
+write.table(Table1b_bot, file="Table1b_bot.html")
+Table1b_top <- corstars(dataMODhy.narm, method="spearman",removeTriangle="upper", result="html")
+Table1a_bot <- corstars_partial(dataMODTR.narm, method="spearman",removeTriangle="upper", result="html")#
+write.table(Table1a_bot, file="Table1b_bot.html")
+Table1a_bot <- corstars_partial(dataMODTR.narm, method="spearman",removeTriangle="upper", result="html")#
+write.table(Table1a_bot, file="Table1a_bot.html")
+source("/Users/ldhurst/Documents/Docs/current/Genetics survery/analysis/Attitudes_v_2/rev1/script/analysis_scripts/sci_know/Analysis_v3a.r")
+for (i in 1:10) {print(i)}
+for (i in c(1:10)) {print(i)}
